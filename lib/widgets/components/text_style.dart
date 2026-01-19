@@ -3,36 +3,51 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:wallpaper/widgets/components/colors.dart';
 
 abstract class CustomStyle {
+  static final _base = GoogleFonts.sen(
+    decoration: TextDecoration.none,
+    textBaseline: TextBaseline.alphabetic,
+  );
+
   //home
-  static final TextStyle title = GoogleFonts.sen(
+  static final TextStyle title = _base.copyWith(
     fontSize: 28,
     fontWeight: FontWeight.w600,
     color: CustomColors.white,
-    decoration: TextDecoration.none,
-    textBaseline: TextBaseline.alphabetic,
   );
   //pro
-  static final TextStyle pro = GoogleFonts.sen(
+  static final TextStyle pro = _base.copyWith(
     fontSize: 12,
     fontWeight: FontWeight.w600,
     color: CustomColors.white,
-    decoration: TextDecoration.none,
-    textBaseline: TextBaseline.alphabetic,
   );
   //banner headline
-  static final TextStyle bannerHeadline = GoogleFonts.sen(
+  static final TextStyle bannerHeadline = _base.copyWith(
     fontSize: 22,
     fontWeight: FontWeight.w600,
     color: CustomColors.white,
-    decoration: TextDecoration.none,
-    textBaseline: TextBaseline.alphabetic,
   );
   //banner subtitle
-  static final TextStyle bannerSubtitle = GoogleFonts.sen(
+  static final TextStyle bannerSubtitle = _base.copyWith(
     fontSize: 14,
     fontWeight: FontWeight.w400,
     color: CustomColors.white,
-    decoration: TextDecoration.none,
-    textBaseline: TextBaseline.alphabetic,
+  );
+  //wallpapers title
+  static final TextStyle wallpapersTitle = _base.copyWith(
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
+    color: CustomColors.white,
+  );
+  //more
+  static final TextStyle more = _base.copyWith(
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    color: CustomColors.purple,
+  );
+  //live
+  static final TextStyle live = _base.copyWith(
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    color: CustomColors.white,
   );
 }

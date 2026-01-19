@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   }
 
   final GoRouter _router = GoRouter(
-    initialLocation: "/home",
+    initialLocation: "/splash",
     routes: routes,
   );
 }

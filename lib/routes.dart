@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wallpaper/screens/home/home.dart';
+import 'package:wallpaper/widgets/splash_screen.dart';
 
 List<RouteBase> routes = [
   //splash screen
-  // GoRoute(
-  //   path: '/splash',
-  //   name: '/splash',
-  //   builder: ((context, state) => const SplashScreen()),
-  // ),
+  GoRoute(
+    path: '/splash',
+    name: '/splash',
+    builder: ((context, state) => const SplashScreen()),
+  ),
   //home
   GoRoute(
     path: '/home',
