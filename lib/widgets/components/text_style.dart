@@ -7,6 +7,18 @@ abstract class CustomStyle {
     decoration: TextDecoration.none,
     textBaseline: TextBaseline.alphabetic,
   );
+  //onboarding title
+  static final TextStyle onboardingTitle = _base.copyWith(
+    fontSize: 32,
+    fontWeight: FontWeight.w900,
+    color: CustomColors.white,
+  );
+  //button text
+  static final TextStyle buttonText = _base.copyWith(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: CustomColors.white,
+  );
 
   //home
   static final TextStyle title = _base.copyWith(
