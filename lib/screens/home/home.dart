@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wallpaper/widgets/components/colors.dart';
 import 'package:wallpaper/widgets/components/text_style.dart';
 import 'package:iconly/iconly.dart';
+import 'package:wallpaper/widgets/gridview.dart';
 import 'package:wallpaper/widgets/wallpapers_title.dart';
 
 class Home extends StatefulWidget {
@@ -127,93 +128,26 @@ class _HomeState extends State<Home> {
                 ),
                 //sizedBox
                 const SizedBox(height: 8),
-                //live wallpapers
-                wallpapersTitle('Live Wallpapers 🎞'),
-                //wallpapers
-                SizedBox(
-                  height: 214,
-                  child: GridView.builder(
-                    itemCount: 4,
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.all(8),
-                    scrollDirection: Axis.horizontal,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 1,
-                      mainAxisSpacing: 8,
-                      mainAxisExtent: 120,
-                    ),
-                    itemBuilder: (context, index) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: CustomColors.purple,
-                        ),
-                        child: Stack(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8, left: 8),
-                              child: Container(
-                                width: 61,
-                                height: 30,
-                                padding: const EdgeInsets.all(5),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6),
-                                  color: CustomColors.blur.withOpacity(0.75),
-                                ),
-                                child: Row(
-                                  children: [
-                                    //icon
-                                    Image.asset(
-                                      'assets/live.png',
-                                      height: 18,
-                                      width: 18,
-                                    ),
-                                    //sizedBox
-                                    const SizedBox(width: 5),
-                                    //live
-                                    Text(
-                                      'Live',
-                                      style: CustomStyle.live,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                //sizedBox
-                const SizedBox(height: 8),
-                //popular wallpapers
-                wallpapersTitle('Popular Wallpapers 🖼'),
-                //wallpapers
-                SizedBox(
-                  height: 214,
-                  child: GridView.builder(
-                    itemCount: 4,
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.all(8),
-                    scrollDirection: Axis.horizontal,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 1,
-                      mainAxisSpacing: 8,
-                      mainAxisExtent: 120,
-                    ),
-                    itemBuilder: (context, index) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: CustomColors.purple,
-                        ),
-                      );
-                    },
-                  ),
+                //
+                ListView.builder(
+                  itemCount: 2,
+                  shrinkWrap: true,
+                  padding: EdgeInsets.zero,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    var titles = [
+                      'Live Wallpapers 🎞',
+                      'Popular Wallpapers 🖼',
+                    ];
+                    return Column(
+                      children: [
+                        //title
+                        wallpapersTitle(titles[index], context),
+                        //
+                        gridView(true, index == 0, 4,context),
+                      ],
+                    );
+                  },
                 ),
               ],
             ),
