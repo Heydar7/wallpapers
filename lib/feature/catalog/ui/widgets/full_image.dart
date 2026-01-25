@@ -17,7 +17,6 @@ class FullImage extends StatefulWidget {
 }
 
 class _FullImageState extends State<FullImage> {
-  
   Widget check() {
     switch (step) {
       //swipe
@@ -43,20 +42,33 @@ class _FullImageState extends State<FullImage> {
     }
   }
 
+  List images = [
+    'assets/wallpaper.png',
+    'assets/wallpaper2.png',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: CustomColors.backgroundColor,
+      //screen
       body: Stack(
         children: [
           //image
-          GestureDetector(
-            onTap: () => GoRouter.of(context).pushNamed('/iosLockScreen'),
-            child: Image.asset(
-              widget.path,
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              fit: BoxFit.cover,
-            ),
+          PageView.builder(
+            scrollDirection: Axis.vertical,
+            itemCount: 2,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () => GoRouter.of(context).pushNamed('/iosLockScreen'),
+                child: Image.asset(
+                  images[index],
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  fit: BoxFit.cover,
+                ),
+              );
+            },
           ),
           //appbar
           SafeArea(

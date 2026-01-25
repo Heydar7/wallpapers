@@ -11,6 +11,13 @@ class AppAssets {
   static const String ios26 = '$_png/ios26.png';
   static const String live = '$_png/live.png';
   static const String wallpaper = '$_png/wallpaper.png';
+  static const String wallpaper2 = '$_png/wallpaper2.png';
+  static const String mockup = '$_png/mockup.png';
+  static const String swipe = '$_png/swipe.png';
+  static const String touch = '$_png/touch.png';
+
+
+
 
   // SVG
   static const String aiIcon = '$_svg/ai_icon.svg';

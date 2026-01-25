@@ -57,7 +57,7 @@ flutter:
 
   assets:
     - assets/
-    #  - assets/png/
+    - assets/png/
     - assets/svg/
 
   fonts:

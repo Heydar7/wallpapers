@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconly/iconly.dart';
 import 'package:wallpaper/core/theme/colors.dart';
 import 'package:wallpaper/core/theme/text_style.dart';
@@ -82,41 +83,47 @@ class _HomeState extends State<Home> {
                 //banner
                 Padding(
                   padding: const EdgeInsets.all(16),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 140,
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      image: const DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage('assets/banner.png'),
-                      ),
+                  child: GestureDetector(
+                    onTap: () => GoRouter.of(context).pushNamed(
+                      '/moreWallpapers',
+                      extra: 'iOS 26',
                     ),
-                    //blur | content
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        //ios icon
-                        Image.asset(
-                          'assets/ios26.png',
-                          height: 36,
-                          width: 36,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 140,
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        image: const DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage('assets/banner.png'),
                         ),
-                        //sizedBox
-                        const SizedBox(height: 8),
-                        //headline
-                        Text(
-                          'Best for iOS 26',
-                          style: CustomStyle.bannerHeadline,
-                        ),
-                        //subtitle
-                        Text(
-                          "Bring the new version's visuals to life",
-                          style: CustomStyle.bannerSubtitle,
-                        ),
-                      ],
+                      ),
+                      //content
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          //ios icon
+                          Image.asset(
+                            'assets/ios26.png',
+                            height: 36,
+                            width: 36,
+                          ),
+                          //sizedBox
+                          const SizedBox(height: 8),
+                          //headline
+                          Text(
+                            'Best for iOS 26',
+                            style: CustomStyle.bannerHeadline,
+                          ),
+                          //subtitle
+                          Text(
+                            "Bring the new version's visuals to life",
+                            style: CustomStyle.bannerSubtitle,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
