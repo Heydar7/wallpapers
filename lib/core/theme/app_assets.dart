@@ -14,4 +14,7 @@ class AppAssets {
 
   // SVG
   static const String aiIcon = '$_svg/ai_icon.svg';
+  static const String homeIcon = '$_svg/home_icon.svg';
+  static const String liveIcon = '$_svg/live_icon.svg';
+  static const String settingsIcon = '$_svg/settings_icon.svg';
 }

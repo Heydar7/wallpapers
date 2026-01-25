@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:iconly/iconly.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wallpaper/core/theme/app_assets.dart';
+import 'package:wallpaper/core/theme/colors.dart';
 import 'dart:ui';
 import 'package:go_router/go_router.dart';
-import 'package:wallpaper/core/theme/colors.dart';
 
 class Shell extends StatefulWidget {
   final Widget child;
@@ -14,27 +15,38 @@ class Shell extends StatefulWidget {
 }
 
 class _ShellState extends State<Shell> {
+  static const _navigationBarHeight = 88.0;
+  static const _blurIntensity = 66.0;
+  static const _iconSize = 24.0;
+  static const _navItemWidth = 80.0;
+  static const _iconTopPadding = 12.0;
+  static const _iconLabelSpacing = 4.0;
+  static const _labelFontSize = 12.0;
+  static const _borderOpacity = 0.1;
+  static const _inactiveOpacity = 0.5;
+
+  static const _navBarGradientColors = [
+    Color(0xBF000000), // Black with 75% opacity
+    Color(0xBF1E1E1E), // #1E1E1E with 75% opacity
+  ];
+
   int _selectedIndex = 0;
 
-  void _onItemTapped(int index, BuildContext context) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  static final _navigationItems = [
+    const _NavItem(iconPath: AppAssets.homeIcon, label: 'Home', route: '/home'),
+    const _NavItem(iconPath: AppAssets.liveIcon, label: 'Live', route: '/live'),
+    const _NavItem(iconPath: AppAssets.aiIcon, label: 'AI', route: '/ai'),
+    const _NavItem(
+        iconPath: AppAssets.settingsIcon,
+        label: 'Settings',
+        route: '/settings'),
+  ];
 
-    switch (index) {
-      case 0:
-        context.go('/home');
-        break;
-      case 1:
-        context.go('/live');
-        break;
-      case 2:
-        context.go('/ai');
-        break;
-      case 3:
-        context.go('/settings');
-        break;
-    }
+  void _onItemTapped(int index) {
+    if (_selectedIndex == index) return;
+
+    setState(() => _selectedIndex = index);
+    context.go(_navigationItems[index].route);
   }
 
   @override
@@ -42,116 +54,115 @@ class _ShellState extends State<Shell> {
     return Scaffold(
       backgroundColor: CustomColors.backgroundColor,
       body: widget.child,
-      bottomNavigationBar: Container(
-        height: 88,
-        decoration: BoxDecoration(
-          border: Border(
-            top: BorderSide(
-              color: Colors.white.withOpacity(0.1),
-              width: 1,
+      bottomNavigationBar: _buildNavigationBar(),
+    );
+  }
+
+  Widget _buildNavigationBar() {
+    return Container(
+      height: _navigationBarHeight,
+      decoration: _buildNavigationBarDecoration(),
+      child: ClipRect(
+        child: BackdropFilter(
+          filter:
+              ImageFilter.blur(sigmaX: _blurIntensity, sigmaY: _blurIntensity),
+          child: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: _navBarGradientColors,
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: List.generate(
+                _navigationItems.length,
+                (index) => _buildNavItem(
+                  item: _navigationItems[index],
+                  index: index,
+                  isSelected: _selectedIndex == index,
+                ),
+              ),
             ),
           ),
         ),
-        child: ClipRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 66, sigmaY: 66),
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  colors: [
-                    const Color(0xFF0E0E0E).withOpacity(0.75),
-                    const Color(0xFF0E0E0E).withOpacity(0.75),
-                    const Color(0xFF0E0E0E).withOpacity(0.75),
-                  ],
-                  stops: const [0.0, 0.5, 1.0],
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _buildNavItem(
-                    icon: IconlyBold.home,
-                    label: 'Home',
-                    index: 0,
-                    context: context,
-                  ),
-                  _buildNavItem(
-                    icon: IconlyBold.video,
-                    label: 'Live',
-                    index: 1,
-                    context: context,
-                  ),
-                  _buildNavItem(
-                    icon: Icons.auto_awesome,
-                    label: 'AI',
-                    index: 2,
-                    context: context,
-                  ),
-                  _buildNavItem(
-                    icon: IconlyBold.setting,
-                    label: 'Settings',
-                    index: 3,
-                    context: context,
-                  ),
-                ],
-              ),
-            ),
-          ),
+      ),
+    );
+  }
+
+  BoxDecoration _buildNavigationBarDecoration() {
+    return BoxDecoration(
+      border: Border(
+        top: BorderSide(
+          color: CustomColors.white.withValues(alpha: _borderOpacity),
+          width: 1,
         ),
       ),
     );
   }
 
   Widget _buildNavItem({
-    required IconData icon,
-    required String label,
+    required _NavItem item,
     required int index,
-    required BuildContext context,
+    required bool isSelected,
   }) {
-    final isSelected = _selectedIndex == index;
-
     return GestureDetector(
-      onTap: () => _onItemTapped(index, context),
+      onTap: () => _onItemTapped(index),
       behavior: HitTestBehavior.opaque,
-      child: SizedBox(
-        width: 80,
+      child: Container(
+        width: _navItemWidth,
+        padding: const EdgeInsets.only(top: _iconTopPadding),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              icon,
-              color: isSelected
-                  ? CustomColors.white
-                  : CustomColors.white.withOpacity(0.5),
-              size: 24,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                color: isSelected
-                    ? CustomColors.white
-                    : CustomColors.white.withOpacity(0.5),
-              ),
-            ),
-            if (isSelected)
-              Container(
-                margin: const EdgeInsets.only(top: 4),
-                height: 2,
-                width: 40,
-                decoration: BoxDecoration(
-                  color: CustomColors.white,
-                  borderRadius: BorderRadius.circular(1),
-                ),
-              ),
+            _buildIcon(item.iconPath, isSelected),
+            const SizedBox(height: _iconLabelSpacing),
+            _buildLabel(item.label, isSelected),
           ],
         ),
       ),
     );
   }
+
+  Widget _buildIcon(String iconPath, bool isSelected) {
+    return SvgPicture.asset(
+      iconPath,
+      width: _iconSize,
+      height: _iconSize,
+      matchTextDirection: false,
+      colorFilter: ColorFilter.mode(
+        isSelected
+            ? CustomColors.white
+            : CustomColors.white.withValues(alpha: _inactiveOpacity),
+        BlendMode.srcIn,
+      ),
+    );
+  }
+
+  Widget _buildLabel(String label, bool isSelected) {
+    return Text(
+      label,
+      style: TextStyle(
+        fontSize: _labelFontSize,
+        fontWeight: FontWeight.w400,
+        color: isSelected
+            ? CustomColors.white
+            : CustomColors.white.withValues(alpha: _inactiveOpacity),
+      ),
+    );
+  }
 }
 
+class _NavItem {
+  final String iconPath;
+  final String label;
+  final String route;
+
+  const _NavItem({
+    required this.iconPath,
+    required this.label,
+    required this.route,
+  });
+}
