@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconly/iconly.dart';
-import 'package:wallpaper/widgets/components/colors.dart';
-import 'package:wallpaper/widgets/components/text_style.dart';
+import 'package:wallpaper/core/theme/colors.dart';
+import 'package:wallpaper/core/theme/text_style.dart';
 
 wallpapersTitle(String title, context) {
   return GestureDetector(
@@ -11,7 +11,11 @@ wallpapersTitle(String title, context) {
       extra: title,
     ),
     child: Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(
+        left: 16,
+        right: 16,
+        top: 8,
+      ),
       child: Row(
         children: [
           //left

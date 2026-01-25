@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:wallpaper/widgets/components/colors.dart';
-import 'package:wallpaper/widgets/components/text_style.dart';
+import 'package:wallpaper/core/theme/colors.dart';
+import 'package:wallpaper/core/theme/text_style.dart';
 
 gridView(
   bool isHorizontal,
@@ -14,7 +14,7 @@ gridView(
     child: GridView.builder(
       itemCount: count,
       shrinkWrap: true,
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(16),
       physics: isHorizontal
           ? const ScrollPhysics()
           : const NeverScrollableScrollPhysics(),

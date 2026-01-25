@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconly/iconly.dart';
-import 'package:wallpaper/widgets/components/colors.dart';
-import 'package:wallpaper/widgets/components/text_style.dart';
-import 'package:wallpaper/widgets/gridview.dart';
+import 'package:wallpaper/core/theme/colors.dart';
+import 'package:wallpaper/core/theme/text_style.dart';
+import 'package:wallpaper/feature/catalog/ui/widgets/gridview.dart';
 
 class MoreWallpapers extends StatefulWidget {
   final String title;
@@ -25,10 +25,9 @@ class _MoreWallpapersState extends State<MoreWallpapers> {
               //appBar
               Padding(
                 padding: const EdgeInsets.only(
-                  left: 8,
-                  right: 8,
-                  top: 16,
-                  bottom: 16,
+                  left: 16,
+                  right: 16,
+                  bottom: 6,
                 ),
                 child: Row(
                   children: [

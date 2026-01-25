@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wallpaper/widgets/components/colors.dart';
+import 'package:wallpaper/core/theme/colors.dart';
 
 abstract class CustomStyle {
   static final _base = GoogleFonts.sen(
@@ -60,6 +60,12 @@ abstract class CustomStyle {
   static final TextStyle live = _base.copyWith(
     fontSize: 12,
     fontWeight: FontWeight.w400,
+    color: CustomColors.white,
+  );
+  //loading
+  static final TextStyle loading = _base.copyWith(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
     color: CustomColors.white,
   );
 }

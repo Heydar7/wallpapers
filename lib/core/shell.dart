@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
-import 'package:wallpaper/widgets/components/colors.dart';
 import 'dart:ui';
 import 'package:go_router/go_router.dart';
+import 'package:wallpaper/core/theme/colors.dart';
 
 class Shell extends StatefulWidget {
   final Widget child;

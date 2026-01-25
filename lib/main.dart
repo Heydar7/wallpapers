@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:wallpaper/routes.dart';
+import 'package:wallpaper/core/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:wallpaper/screens/home/home.dart';
-import 'package:wallpaper/screens/home/more_wallpapers.dart';
-import 'package:wallpaper/screens/onboarding/onboarding.dart';
-import 'package:wallpaper/widgets/components/shell.dart';
-import 'package:wallpaper/widgets/full_image.dart';
-import 'package:wallpaper/widgets/ios_lockscreen.dart';
-import 'package:wallpaper/widgets/splash_screen.dart';
+import 'package:wallpaper/core/shell.dart';
+import 'package:wallpaper/feature/auth/ui/screens/onboarding.dart';
+import 'package:wallpaper/feature/auth/ui/screens/splash_screen.dart';
+import 'package:wallpaper/feature/catalog/ui/screens/home.dart';
+import 'package:wallpaper/feature/catalog/ui/screens/more_wallpapers.dart';
+import 'package:wallpaper/feature/catalog/ui/widgets/full_image.dart';
+import 'package:wallpaper/feature/catalog/ui/widgets/ios_lockscreen.dart';
 
 List<RouteBase> routes = [
   //splash screen
@@ -59,19 +59,19 @@ List<RouteBase> routes = [
     path: '/onboarding',
     name: '/onboarding',
     pageBuilder: (context, state) {
-          return CustomTransitionPage(
-            key: state.pageKey,
-            child: const Onboarding(),
-            transitionsBuilder: (context, animation, secondaryAnimation, child) {
-              return FadeTransition(
-                opacity:CurveTween(curve: Curves.easeInOutCirc).animate(animation),
-                child: child,
-              );
-            },
+      return CustomTransitionPage(
+        key: state.pageKey,
+        child: const Onboarding(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(
+            opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+            child: child,
           );
         },
+      );
+    },
   ),
-  
+
   //shell route с навбаром
   ShellRoute(
     builder: (context, state, child) {
@@ -86,9 +86,11 @@ List<RouteBase> routes = [
           return CustomTransitionPage(
             key: state.pageKey,
             child: const Home(),
-            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
               return FadeTransition(
-                opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                opacity:
+                    CurveTween(curve: Curves.easeInOutCirc).animate(animation),
                 child: child,
               );
             },
@@ -100,60 +102,21 @@ List<RouteBase> routes = [
       GoRoute(
         path: '/live',
         name: '/live',
-        pageBuilder: (context, state) {
-          return CustomTransitionPage(
-            key: state.pageKey,
-            child: const Placeholder(),
-            transitionsBuilder:
-                (context, animation, secondaryAnimation, child) {
-              return FadeTransition(
-                opacity:
-                    CurveTween(curve: Curves.easeInOutCirc).animate(animation),
-                child: child,
-              );
-            },
-          );
-        },
+        builder: ((context, state) => const Scaffold()),
       ),
 
       //ai
       GoRoute(
         path: '/ai',
         name: '/ai',
-        pageBuilder: (context, state) {
-          return CustomTransitionPage(
-            key: state.pageKey,
-            child: const Placeholder(),
-            transitionsBuilder:
-                (context, animation, secondaryAnimation, child) {
-              return FadeTransition(
-                opacity:
-                    CurveTween(curve: Curves.easeInOutCirc).animate(animation),
-                child: child,
-              );
-            },
-          );
-        },
+        builder: ((context, state) => const Scaffold()),
       ),
 
       //settings
       GoRoute(
         path: '/settings',
         name: '/settings',
-        pageBuilder: (context, state) {
-          return CustomTransitionPage(
-            key: state.pageKey,
-            child: const Placeholder(),
-            transitionsBuilder:
-                (context, animation, secondaryAnimation, child) {
-              return FadeTransition(
-                opacity:
-                    CurveTween(curve: Curves.easeInOutCirc).animate(animation),
-                child: child,
-              );
-            },
-          );
-        },
+        builder: ((context, state) => const Scaffold()),
       ),
     ],
   ),

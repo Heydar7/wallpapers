@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconly/iconly.dart';
-import 'package:wallpaper/widgets/components/colors.dart';
+import 'package:wallpaper/core/theme/colors.dart';
+import 'package:wallpaper/feature/catalog/ui/widgets/popup.dart';
+
+enum TutorialStep { loading, swipe, touch, none }
+
+TutorialStep step = TutorialStep.loading;
 
 class FullImage extends StatefulWidget {
   final String path;
@@ -12,6 +17,32 @@ class FullImage extends StatefulWidget {
 }
 
 class _FullImageState extends State<FullImage> {
+  
+  Widget check() {
+    switch (step) {
+      //swipe
+      case TutorialStep.swipe:
+        return fullImagePopup(
+          'Swipe up to see\nother wallpapers',
+          'assets/swipe.png',
+          () => setState(() => step = TutorialStep.touch),
+        );
+      //touch
+      case TutorialStep.touch:
+        return fullImagePopup(
+          'Tap the screen to \nsee the wallpaper \non your device',
+          'assets/touch.png',
+          () => setState(() => step = TutorialStep.none),
+        );
+      //loading
+      case TutorialStep.loading:
+        return loading(() => setState(() => step = TutorialStep.swipe));
+      //none
+      case TutorialStep.none:
+        return const SizedBox.shrink();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,12 +61,7 @@ class _FullImageState extends State<FullImage> {
           //appbar
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.only(
-                left: 8,
-                right: 8,
-                top: 16,
-                bottom: 16,
-              ),
+              padding: const EdgeInsets.only(left: 16, right: 16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -84,6 +110,8 @@ class _FullImageState extends State<FullImage> {
               ),
             ),
           ),
+          //
+          check(),
         ],
       ),
     );
