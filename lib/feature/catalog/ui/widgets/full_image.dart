@@ -4,7 +4,7 @@ import 'package:iconly/iconly.dart';
 import 'package:wallpaper/core/theme/colors.dart';
 import 'package:wallpaper/feature/catalog/ui/widgets/popup.dart';
 
-enum TutorialStep { loading, swipe, touch, none }
+enum TutorialStep { loading, swipe, touch, premium, none }
 
 TutorialStep step = TutorialStep.loading;
 
@@ -17,8 +17,15 @@ class FullImage extends StatefulWidget {
 }
 
 class _FullImageState extends State<FullImage> {
+  bool like = false;
+
   Widget check() {
     switch (step) {
+      //loading
+      case TutorialStep.loading:
+        return loading(
+          () => setState(() => step = TutorialStep.swipe),
+        );
       //swipe
       case TutorialStep.swipe:
         return fullImagePopup(
@@ -31,11 +38,15 @@ class _FullImageState extends State<FullImage> {
         return fullImagePopup(
           'Tap the screen to \nsee the wallpaper \non your device',
           'assets/touch.png',
+          () => setState(() => step = TutorialStep.premium),
+        );
+      //premium
+      case TutorialStep.premium:
+        return getPremiumPopup(
+          'Unlock all premium wallpapers and get \nthe most out of Premium today',
+          'assets/crown.png',
           () => setState(() => step = TutorialStep.none),
         );
-      //loading
-      case TutorialStep.loading:
-        return loading(() => setState(() => step = TutorialStep.swipe));
       //none
       case TutorialStep.none:
         return const SizedBox.shrink();
@@ -73,7 +84,7 @@ class _FullImageState extends State<FullImage> {
           //appbar
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16),
+              padding: const EdgeInsets.only(left: 16, right: 16, top: 11.5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -88,9 +99,12 @@ class _FullImageState extends State<FullImage> {
                   ),
                   //heart
                   GestureDetector(
-                    child: const Icon(
-                      IconlyLight.heart,
-                      color: CustomColors.white,
+                    onTap: () => setState(() {
+                      like = !like;
+                    }),
+                    child: Icon(
+                      like ? IconlyBold.heart : IconlyLight.heart,
+                      color: like ? CustomColors.red : CustomColors.white,
                       size: 28,
                     ),
                   ),
@@ -108,7 +122,7 @@ class _FullImageState extends State<FullImage> {
                 child: Container(
                   height: 64,
                   width: 64,
-                  padding: const EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(16),
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: CustomColors.white,

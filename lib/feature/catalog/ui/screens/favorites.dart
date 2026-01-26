@@ -3,27 +3,22 @@ import 'package:wallpaper/core/theme/colors.dart';
 import 'package:wallpaper/feature/catalog/ui/widgets/appbar.dart';
 import 'package:wallpaper/feature/catalog/ui/widgets/gridview.dart';
 
-class MoreWallpapers extends StatefulWidget {
-  final String title;
-  const MoreWallpapers({super.key, required this.title});
+class Favorites extends StatelessWidget {
+  const Favorites({super.key});
 
-  @override
-  State<MoreWallpapers> createState() => _MoreWallpapersState();
-}
-
-class _MoreWallpapersState extends State<MoreWallpapers> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: CustomColors.backgroundColor,
+      //screen
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
             children: [
-              //appBar
-              appBarWithTitle(widget.title, context),
+              //appbar
+              appBarWithTitle('Favorites', context),
               //gridView
-              gridView(false, true, 10, context)
+              gridView(false, true, 10, context),
             ],
           ),
         ),

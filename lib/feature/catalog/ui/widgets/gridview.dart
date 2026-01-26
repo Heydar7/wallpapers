@@ -3,7 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:wallpaper/core/theme/colors.dart';
 import 'package:wallpaper/core/theme/text_style.dart';
 
-gridView(
+bool isSelected = false;
+
+Widget gridView(
   bool isHorizontal,
   bool isLive,
   int count,
@@ -86,6 +88,66 @@ gridView(
                       ],
                     )
                   : null),
+        );
+      },
+    ),
+  );
+}
+
+Widget chooseStyleGrid(VoidCallback onTap) {
+  return SizedBox(
+    height: 329,
+    child: GridView.builder(
+      itemCount: 10,
+      shrinkWrap: true,
+      scrollDirection: Axis.horizontal,
+      padding: const EdgeInsets.only(left: 16, right: 16, top: 10, bottom: 8),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        mainAxisExtent: 120,
+      ),
+      itemBuilder: (context, index) {
+        return GestureDetector(
+          onTap: onTap,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //image | selected
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  //image
+                  Container(
+                    width: 120,
+                    height: 120,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: const DecorationImage(
+                        image: AssetImage('assets/wallpaper.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  //selected
+                  if (isSelected)
+                    Image.asset(
+                      'assets/selected.png',
+                      height: 36,
+                      width: 36,
+                    ),
+                ],
+              ),
+              //sizedBox
+              const SizedBox(height: 10),
+              //text
+              Text(
+                'Style',
+                style: isSelected ? CustomStyle.live : CustomStyle.greyText2,
+              ),
+            ],
+          ),
         );
       },
     ),

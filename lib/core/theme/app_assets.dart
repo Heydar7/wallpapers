@@ -15,6 +15,7 @@ class AppAssets {
   static const String mockup = '$_png/mockup.png';
   static const String swipe = '$_png/swipe.png';
   static const String touch = '$_png/touch.png';
+  static const String crown = '$_png/crown.png';
 
 
 

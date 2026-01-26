@@ -26,8 +26,8 @@ class _ShellState extends State<Shell> {
   static const _inactiveOpacity = 0.5;
 
   static const _navBarGradientColors = [
-    Color(0xBF000000), // Black with 75% opacity
-    Color(0xBF1E1E1E), // #1E1E1E with 75% opacity
+    CustomColors.navBlack, // Black with 75% opacity
+    CustomColors.blur, // #1E1E1E with 75% opacity
   ];
 
   int _selectedIndex = 0;
@@ -96,8 +96,7 @@ class _ShellState extends State<Shell> {
     return BoxDecoration(
       border: Border(
         top: BorderSide(
-          color: CustomColors.white,
-          // .withValues(alpha: _borderOpacity),
+          color: CustomColors.white.withOpacity(_borderOpacity),
           width: 1,
         ),
       ),
@@ -136,8 +135,7 @@ class _ShellState extends State<Shell> {
       colorFilter: ColorFilter.mode(
         isSelected
             ? CustomColors.white
-            : CustomColors.white,
-            // .withValues(alpha: _inactiveOpacity),
+            : CustomColors.white.withOpacity(_inactiveOpacity),
         BlendMode.srcIn,
       ),
     );
@@ -151,8 +149,7 @@ class _ShellState extends State<Shell> {
         fontWeight: FontWeight.w400,
         color: isSelected
             ? CustomColors.white
-            : CustomColors.white
-            // .withValues(alpha: _inactiveOpacity),
+            : CustomColors.white.withOpacity(_inactiveOpacity),
       ),
     );
   }

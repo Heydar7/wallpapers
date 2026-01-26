@@ -92,7 +92,7 @@ class _OnboardingState extends State<Onboarding> {
           child: GestureDetector(
             onTap: () {
               if (isLast) {
-                context.goNamed('/home');
+                context.goNamed('home');
                 return;
               }
               controller.nextPage(
