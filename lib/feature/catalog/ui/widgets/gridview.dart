@@ -3,98 +3,113 @@ import 'package:go_router/go_router.dart';
 import 'package:wallpaper/core/theme/colors.dart';
 import 'package:wallpaper/core/theme/text_style.dart';
 
-bool isSelected = false;
+int isSelectedIndex = -1;
 
-Widget gridView(
+Widget gridViewSliver(
   bool isHorizontal,
   bool isLive,
   int count,
-  context,
+  BuildContext context,
 ) {
-  return SizedBox(
-    height: isHorizontal ? 214 : MediaQuery.of(context).size.height,
-    child: GridView.builder(
-      itemCount: count,
-      shrinkWrap: true,
-      padding: const EdgeInsets.all(16),
-      physics: isHorizontal
-          ? const ScrollPhysics()
-          : const NeverScrollableScrollPhysics(),
-      scrollDirection: isHorizontal ? Axis.horizontal : Axis.vertical,
-      gridDelegate: isHorizontal
-          //
-          ? const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 1,
-              mainAxisSpacing: 8,
-              mainAxisExtent: 120,
-            )
-          //
-          : const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              mainAxisSpacing: 8,
-              crossAxisSpacing: 8,
-              mainAxisExtent: 195,
-            ),
-      itemBuilder: (context, index) {
-        return GestureDetector(
-          onTap: () => GoRouter.of(context).pushNamed(
-            '/fullImage',
-            extra: 'assets/wallpaper.png',
-          ),
-          child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: CustomColors.purple,
-                //image
-                image: const DecorationImage(
-                  image: AssetImage('assets/wallpaper.png'),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              //
-              child: isLive
-                  ? Stack(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8, left: 8),
-                          child: Container(
-                            width: 61,
-                            height: 30,
-                            padding: const EdgeInsets.all(5),
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(6),
-                              color: CustomColors.blur.withOpacity(0.75),
-                            ),
-                            child: Row(
-                              children: [
-                                //icon
-                                Image.asset(
-                                  'assets/live.png',
-                                  height: 18,
-                                  width: 18,
-                                ),
-                                //sizedBox
-                                const SizedBox(width: 5),
-                                //live
-                                Text(
-                                  'Live',
-                                  style: CustomStyle.live,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  : null),
-        );
-      },
+  if (isHorizontal) {
+    return SliverToBoxAdapter(
+      child: SizedBox(
+        height: 214,
+        child: ListView.separated(
+          padding: const EdgeInsets.all(16),
+          scrollDirection: Axis.horizontal,
+          itemCount: count,
+          separatorBuilder: (_, __) => const SizedBox(width: 8),
+          itemBuilder: (context, index) {
+            return SizedBox(
+              width: 120,
+              child: GridItem(isLive: isLive),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  return SliverPadding(
+    padding: const EdgeInsets.all(16),
+    sliver: SliverGrid(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) => GridItem(isLive: isLive),
+        childCount: count,
+      ),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        mainAxisSpacing: 8,
+        crossAxisSpacing: 8,
+        mainAxisExtent: 195,
+      ),
     ),
   );
 }
 
-Widget chooseStyleGrid(VoidCallback onTap) {
+class GridItem extends StatelessWidget {
+  final bool isLive;
+  const GridItem({super.key, required this.isLive});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => GoRouter.of(context).pushNamed(
+        '/fullImage',
+        extra: 'assets/wallpaper.png',
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: Stack(
+          children: [
+            // background image
+            const Positioned.fill(
+              child: Image(
+                image: AssetImage('assets/wallpaper.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+
+            // live badge
+            if (isLive)
+              const Positioned(
+                top: 8,
+                left: 8,
+                child: _LiveBadge(),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _LiveBadge extends StatelessWidget {
+  const _LiveBadge();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 61,
+      height: 30,
+      padding: const EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(6),
+        color: CustomColors.blur.withOpacity(0.75),
+      ),
+      child: Row(
+        children: [
+          Image.asset('assets/live.png', height: 18, width: 18),
+          const SizedBox(width: 5),
+          Text('Live', style: CustomStyle.live),
+        ],
+      ),
+    );
+  }
+}
+
+Widget chooseStyleGrid() {
   return SizedBox(
     height: 329,
     child: GridView.builder(
@@ -109,8 +124,11 @@ Widget chooseStyleGrid(VoidCallback onTap) {
         mainAxisExtent: 120,
       ),
       itemBuilder: (context, index) {
+        final isSelected = isSelectedIndex == index;
         return GestureDetector(
-          onTap: onTap,
+          onTap: () {
+            isSelectedIndex = index;
+          },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

@@ -8,6 +8,7 @@ import 'package:wallpaper/feature/catalog/ui/screens/favorites.dart';
 import 'package:wallpaper/feature/catalog/ui/screens/home.dart';
 import 'package:wallpaper/feature/catalog/ui/screens/live.dart';
 import 'package:wallpaper/feature/catalog/ui/screens/more_wallpapers.dart';
+import 'package:wallpaper/feature/catalog/ui/screens/open_url.dart';
 import 'package:wallpaper/feature/catalog/ui/screens/settings.dart';
 import 'package:wallpaper/feature/catalog/ui/widgets/full_image.dart';
 import 'package:wallpaper/feature/catalog/ui/widgets/ios_lockscreen.dart';
@@ -80,6 +81,15 @@ List<RouteBase> routes = [
     path: '/favorites',
     name: '/favorites',
     builder: ((context, state) => const Favorites()),
+  ),
+  //open url
+  GoRoute(
+    path: '/openUrl',
+    name: '/openUrl',
+    builder: ((context, state) {
+      final title = state.extra! as String;
+      return OpenUrl(title: title);
+    }),
   ),
 
   //shell route with navbar
