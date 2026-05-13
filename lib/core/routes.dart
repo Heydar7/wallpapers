@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wallpaper/core/shell.dart';
-import 'package:wallpaper/feature/auth/ui/screens/onboarding.dart';
-import 'package:wallpaper/feature/auth/ui/screens/splash_screen.dart';
-import 'package:wallpaper/feature/catalog/ui/screens/ai.dart';
-import 'package:wallpaper/feature/catalog/ui/screens/favorites.dart';
-import 'package:wallpaper/feature/catalog/ui/screens/home.dart';
-import 'package:wallpaper/feature/catalog/ui/screens/live.dart';
-import 'package:wallpaper/feature/catalog/ui/screens/more_wallpapers.dart';
-import 'package:wallpaper/feature/catalog/ui/screens/open_url.dart';
-import 'package:wallpaper/feature/catalog/ui/screens/settings.dart';
-import 'package:wallpaper/feature/catalog/ui/widgets/full_image.dart';
-import 'package:wallpaper/feature/catalog/ui/widgets/ios_lockscreen.dart';
+import 'package:wallpaper/feature/ui/navbar/ai.dart';
+import 'package:wallpaper/feature/ui/screens/favorites.dart';
+import 'package:wallpaper/feature/ui/navbar/home.dart';
+import 'package:wallpaper/feature/ui/navbar/live.dart';
+import 'package:wallpaper/feature/ui/screens/more_wallpapers.dart';
+import 'package:wallpaper/feature/ui/screens/open_url.dart';
+import 'package:wallpaper/feature/ui/navbar/settings.dart';
+import 'package:wallpaper/feature/ui/screens/full_image.dart';
+import 'package:wallpaper/feature/ui/screens/ios_lockscreen.dart';
+import 'package:wallpaper/feature/ui/auth/onboarding.dart';
+import 'package:wallpaper/feature/ui/auth/splash_screen.dart';
 
 CustomTransitionPage animation(GoRouterState state, Widget child) {
   return CustomTransitionPage(
@@ -56,8 +56,14 @@ List<RouteBase> routes = [
     path: '/fullImage',
     name: '/fullImage',
     builder: ((context, state) {
-      final path = state.extra! as String;
-      return FullImage(path: path);
+      final data = state.extra as Map<String, dynamic>;
+      final list = data['list'] as List<String>;
+      final number = data['number'] as int;
+
+      return FullImage(
+        images: list,
+        number: number,
+      );
     }),
   ),
   //ios lock screen
@@ -65,13 +71,10 @@ List<RouteBase> routes = [
     path: '/iosLockScreen',
     name: '/iosLockScreen',
     pageBuilder: (context, state) {
+      final image = state.extra! as String;
       return animation(
         state,
-        const IOSLockScreenPreview(
-          wallpaper: NetworkImage(
-            'https://picsum.photos/1200/2400',
-          ),
-        ),
+        IOSLockScreenPreview(wallpaper: image),
       );
     },
   ),
@@ -86,10 +89,16 @@ List<RouteBase> routes = [
   GoRoute(
     path: '/openUrl',
     name: '/openUrl',
-    builder: ((context, state) {
-      final title = state.extra! as String;
-      return OpenUrl(title: title);
-    }),
+    builder: (context, state) {
+      final data = state.extra as Map<String, String>;
+      final title = data['title']!;
+      final url = data['url']!;
+
+      return OpenUrl(
+        title: title,
+        url: url,
+      );
+    },
   ),
 
   //shell route with navbar
