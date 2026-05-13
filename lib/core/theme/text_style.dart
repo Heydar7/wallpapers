@@ -72,18 +72,18 @@ abstract class CustomStyle {
   static final TextStyle greyText = _base.copyWith(
     fontSize: 16,
     fontWeight: FontWeight.w400,
-    color: CustomColors.white.withOpacity(0.5),
+    color: CustomColors.white.withValues(alpha:0.5),
   );
   //grey text 2
   static final TextStyle greyText2 = _base.copyWith(
     fontSize: 12,
     fontWeight: FontWeight.w400,
-    color: CustomColors.white.withOpacity(0.5),
+    color: CustomColors.white.withValues(alpha:0.5),
   );
   //app version
   static final TextStyle appVersion = _base.copyWith(
     fontSize: 14,
     fontWeight: FontWeight.w400,
-    color: CustomColors.white.withOpacity(0.5),
+    color: CustomColors.white.withValues(alpha:0.5),
   );
 }

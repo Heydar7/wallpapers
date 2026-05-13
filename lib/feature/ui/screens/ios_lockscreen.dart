@@ -61,9 +61,9 @@ class _IOSLockScreenPreviewState extends State<IOSLockScreenPreview> {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      Colors.black.withOpacity(0.30),
+                      Colors.black.withValues(alpha:0.30),
                       Colors.transparent,
-                      Colors.black.withOpacity(0.25),
+                      Colors.black.withValues(alpha:0.25),
                     ],
                   ),
                 ),

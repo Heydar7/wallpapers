@@ -115,7 +115,7 @@ class _LiveBadge extends StatelessWidget {
       padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(6),
-        color: CustomColors.blur.withOpacity(0.75),
+        color: CustomColors.blur.withValues(alpha:0.75),
       ),
       child: Row(
         children: [

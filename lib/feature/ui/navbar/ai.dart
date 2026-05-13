@@ -149,7 +149,7 @@ class _AIState extends BaseScrollScreen<AI> {
                             'Describe what you want with details.\nExample: Portrait of a cat wearing a hat',
                         hintStyle: CustomStyle.appVersion,
                         filled: true,
-                        fillColor: CustomColors.blur.withOpacity(0.75),
+                        fillColor: CustomColors.blur.withValues(alpha:0.75),
                         counterText: '',
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
@@ -194,7 +194,7 @@ class _AIState extends BaseScrollScreen<AI> {
                             dotDecoration: DotDecoration(
                               width: 9,
                               height: 4,
-                              color: CustomColors.white.withOpacity(0.5),
+                              color: CustomColors.white.withValues(alpha:0.5),
                               borderRadius: BorderRadius.circular(5),
                             ),
                             spacing: 6,

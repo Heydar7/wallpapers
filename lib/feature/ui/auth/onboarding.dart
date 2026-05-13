@@ -72,7 +72,7 @@ class _OnboardingState extends State<Onboarding> {
                   Text(
                     subtitle[index],
                     style: CustomStyle.bannerSubtitle.copyWith(
-                      color: CustomColors.white.withOpacity(0.5),
+                      color: CustomColors.white.withValues(alpha:0.5),
                     ),
                     textAlign: TextAlign.center,
                   ),

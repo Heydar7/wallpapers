@@ -19,7 +19,7 @@ Widget floatingButton(ScrollController scrollController) {
         width: 56,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: CustomColors.blur.withOpacity(0.75),
+          color: CustomColors.blur.withValues(alpha:0.75),
         ),
         child: const Icon(
           IconlyBold.arrow_up_2,
@@ -45,7 +45,7 @@ Widget floatingButtonForURL(bool isScrolled, WebViewController controller) {
         width: 56,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: CustomColors.blur.withOpacity(0.75),
+          color: CustomColors.blur.withValues(alpha:0.75),
         ),
         child: const Icon(
           IconlyBold.arrow_up_2,

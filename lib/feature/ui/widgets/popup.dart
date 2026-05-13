@@ -16,7 +16,7 @@ Widget fullImagePopup(String title, String imagePath, VoidCallback onTap) {
           //blur
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-            child: Container(color: CustomColors.blur2.withOpacity(0.5)),
+            child: Container(color: CustomColors.blur2.withValues(alpha:0.5)),
           ),
           //hint card
           Align(
@@ -25,7 +25,7 @@ Widget fullImagePopup(String title, String imagePath, VoidCallback onTap) {
               // width: 140,
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: CustomColors.blur.withOpacity(0.75),
+                color: CustomColors.blur.withValues(alpha:0.75),
                 borderRadius: BorderRadius.circular(30),
               ),
               child: Column(
@@ -62,7 +62,7 @@ Widget loading(double progress) {
           //blur
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: Container(color: CustomColors.blur2.withOpacity(0.5)),
+            child: Container(color: CustomColors.blur2.withValues(alpha:0.5)),
           ),
           // swipe hint card
           Align(
@@ -72,7 +72,7 @@ Widget loading(double progress) {
               height: 120,
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: CustomColors.blur.withOpacity(0.75),
+                color: CustomColors.blur.withValues(alpha:0.75),
                 borderRadius: BorderRadius.circular(30),
               ),
               child: Stack(
@@ -86,7 +86,7 @@ Widget loading(double progress) {
                       value: 1,
                       strokeWidth: 5,
                       valueColor: AlwaysStoppedAnimation(
-                        CustomColors.white.withOpacity(0.1),
+                        CustomColors.white.withValues(alpha:0.1),
                       ),
                     ),
                   ),
@@ -120,7 +120,7 @@ Widget loading(double progress) {
   );
 }
 
-dynamic premiumPopup(context) {
+dynamic premiumPopup(BuildContext context) {
   final titles = [
     'Restore',
     'Terms of Use',
@@ -142,7 +142,7 @@ dynamic premiumPopup(context) {
           //blur
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: Container(color: CustomColors.blur2.withOpacity(0.5)),
+            child: Container(color: CustomColors.blur2.withValues(alpha:0.5)),
           ),
           //close
           GestureDetector(
@@ -200,7 +200,7 @@ dynamic premiumPopup(context) {
                   padding: const EdgeInsets.all(6),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(6),
-                    color: CustomColors.purple.withOpacity(0.1),
+                    color: CustomColors.purple.withValues(alpha:0.1),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,

@@ -96,7 +96,7 @@ class _ShellState extends State<Shell> {
     return BoxDecoration(
       border: Border(
         top: BorderSide(
-          color: CustomColors.white.withOpacity(_borderOpacity),
+          color: CustomColors.white.withValues(alpha:_borderOpacity),
           width: 1,
         ),
       ),
@@ -135,7 +135,7 @@ class _ShellState extends State<Shell> {
       colorFilter: ColorFilter.mode(
         isSelected
             ? CustomColors.white
-            : CustomColors.white.withOpacity(_inactiveOpacity),
+            : CustomColors.white.withValues(alpha: _inactiveOpacity),
         BlendMode.srcIn,
       ),
     );
@@ -149,7 +149,7 @@ class _ShellState extends State<Shell> {
         fontWeight: FontWeight.w400,
         color: isSelected
             ? CustomColors.white
-            : CustomColors.white.withOpacity(_inactiveOpacity),
+            : CustomColors.white.withValues(alpha:_inactiveOpacity),
       ),
     );
   }

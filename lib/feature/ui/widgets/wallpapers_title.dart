@@ -4,7 +4,7 @@ import 'package:iconly/iconly.dart';
 import 'package:wallpaper/core/theme/colors.dart';
 import 'package:wallpaper/core/theme/text_style.dart';
 
-wallpapersTitle(String title, context) {
+GestureDetector wallpapersTitle(String title, context) {
   final formattedTitle =
       title.isNotEmpty ? title[0].toUpperCase() + title.substring(1) : title;
 

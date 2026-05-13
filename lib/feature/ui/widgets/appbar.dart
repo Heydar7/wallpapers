@@ -30,7 +30,7 @@ SliverAppBar appBarWithPremiumIcon({
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 66, sigmaY: 66),
               child: Container(
-                color: CustomColors.blur.withOpacity(0.75),
+                color: CustomColors.blur.withValues(alpha:0.75),
               ),
             ),
           ),
@@ -85,7 +85,7 @@ SliverAppBar appBarWithPremiumIcon({
                   onTap: () => GoRouter.of(context).pushNamed('/favorites'),
                   child: Icon(
                     IconlyLight.heart,
-                    color: CustomColors.white.withOpacity(0.50),
+                    color: CustomColors.white.withValues(alpha:0.50),
                     size: 28,
                   ),
                 ),
@@ -121,7 +121,7 @@ SliverAppBar appBarWithTitle({
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 66, sigmaY: 66),
               child: Container(
-                color: CustomColors.blur.withOpacity(0.75),
+                color: CustomColors.blur.withValues(alpha:0.75),
               ),
             ),
           ),

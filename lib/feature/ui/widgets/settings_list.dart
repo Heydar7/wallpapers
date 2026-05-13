@@ -14,7 +14,7 @@ Widget settingsList(String title, IconData icon, double top) {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: CustomColors.blur.withOpacity(0.5),
+        color: CustomColors.blur.withValues(alpha:0.5),
       ),
       child: Row(
         children: [
